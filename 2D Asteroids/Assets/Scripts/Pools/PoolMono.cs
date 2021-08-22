@@ -18,11 +18,10 @@ public class PoolMono<T> where T : MonoBehaviour
         CreatePool(capacity);
     }
 
-    public PoolMono(T prefab, int capacity, Transform container)
+    public PoolMono(T prefab, int capacity, string poolName)
     {
         _prefab = prefab;
-        _container = container;
-
+        _container = new GameObject(poolName).transform;
         CreatePool(capacity);
     }
     
@@ -38,7 +37,7 @@ public class PoolMono<T> where T : MonoBehaviour
 
     private T CreateObject(bool isActiveByDefault = false)
     {
-        var createdObject = UnityEngine.Object.Instantiate(_prefab, _container);
+        var createdObject = UnityEngine.Object.Instantiate(_prefab,_container);
         createdObject.gameObject.SetActive(isActiveByDefault);
         _pool.Add(createdObject);
         return createdObject;

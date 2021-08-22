@@ -10,6 +10,7 @@ public class BulletFactory : IBulletFactory
     }
     public GameObject CreateBullet()
     {
-        return new GameObject("Bullet").SetTag("Bullet").AddSprite(_bulletData.sprite).AddCircleCollider2D().AddRigidBody2D().AddTrailRenderer();
+        return new GameObject("Bullet").SetTag("Bullet").AddSprite(_bulletData.sprite)
+            .AddCircleCollider2D().AddRigidBody2D().AddTrailRenderer();
     }
 }

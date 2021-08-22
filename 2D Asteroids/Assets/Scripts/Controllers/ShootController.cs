@@ -8,14 +8,15 @@ public class ShootController : IExecute
     private bool _fire = false;
     private Vector3 _mousePosition;
     private IUserShoots _shoot;
-    private IBulletFactory _bulletFactory;
     private readonly Transform _bulletStartPosition;
     private Rigidbody2D _bulletRB;
+    private PoolMono<BulletController> _bulletPool;
 
-    public ShootController(IUserShoots shoot, Transform unit, BulletData data)
+    public ShootController(IUserShoots shoot, Transform unit, BulletData data, PoolMono<BulletController> bulletPool)
     {
+        _bulletPool = bulletPool;
+        _bulletPool.autoExpand = bulletPool.autoExpand;
         _bulletData = data;
-        _bulletFactory = new BulletFactory(_bulletData);
         _shoot = shoot;
         _unit = unit;
         _bulletStartPosition = _unit.GetChild(2);
@@ -34,15 +35,16 @@ public class ShootController : IExecute
         if (_fire)
         {
             var speed = _bulletData.speed * deltaTime;
-            var bulletInitialization = new BulletInitialization(_bulletFactory, _bulletStartPosition.position);
-            GameObject bullet =  bulletInitialization.GetBullet();
+            var bullet = _bulletPool.GetFreeElement();
+            _bulletPool.autoExpand = _bulletData.autoExpand;
+            bullet.transform.position = _bulletStartPosition.position;
 
             _bulletRB = bullet.GetComponent<Rigidbody2D>();
+
             Vector3 moveDirection = Camera.main.ScreenToWorldPoint(_mousePosition) - _bulletStartPosition.position;
             _bulletRB.AddForce(moveDirection * speed, ForceMode2D.Impulse);
 
             _fire = false;
-            Object.Destroy(bullet, 3);
         }
     }
 }
