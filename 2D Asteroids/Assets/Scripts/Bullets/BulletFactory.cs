@@ -13,4 +13,9 @@ public class BulletFactory : IBulletFactory
         return new GameObject("Bullet").SetTag("Bullet").AddSprite(_bulletData.sprite)
             .AddCircleCollider2D().AddRigidBody2D().AddTrailRenderer();
     }
+
+    public BulletController CreateBullets()
+    {
+        return new GameObject("Bullet").AddComponent<BulletController>();
+    }
 }

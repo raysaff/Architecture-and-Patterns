@@ -12,7 +12,9 @@ public sealed class Data : ScriptableObject
     private string _bulletDataPath;
     private BulletData _bullet;
 
-
+    [SerializeField]
+    private string _enemyDataPath;
+    private EnemyData _enemy;
 
     public PlayerData Player
     {
@@ -40,7 +42,18 @@ public sealed class Data : ScriptableObject
         }
     }
 
+    public EnemyData Enemy
+    {
+        get
+        {
+            if (_enemy ==null)
+            {
+                _enemy = Load<EnemyData>("Data/" + _enemyDataPath);
+            }
 
+            return _enemy;
+        }
+    }
 
 
     private T Load<T>(string resourcesPath) where T : Object =>

@@ -16,6 +16,12 @@ public sealed class GameInitialization
         controllers.Add(new RotationController(inputInitialization.GetInputDirection(), playerInitialization.GetPlayer()));
         controllers.Add(new CameraController(playerInitialization.GetPlayer(), camera.transform));
 
+        var enemyFactory = new EnemyFactory(data.Enemy);
+        var enemyPool = new EnemyPool(enemyFactory, data.Enemy.count, NameManager.POOL_ENEMIES);
+        controllers.Add(new EnemyInitialization(playerInitialization.GetPlayer(), enemyPool, data.Enemy));
+
+        controllers.Add(new CollisionController(enemyPool));
+
         var _bulletsPool = new PoolMono<BulletController>(data.Bullet._prefab, data.Bullet.count, NameManager.POOL_BULLETS);
         controllers.Add(new ShootController(inputInitialization.GetShoot(), playerInitialization.GetPlayer(), data.Bullet, _bulletsPool));
     }

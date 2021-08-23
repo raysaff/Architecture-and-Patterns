@@ -36,6 +36,7 @@ public class ShootController : IExecute
         {
             var speed = _bulletData.speed * deltaTime;
             var bullet = _bulletPool.GetFreeElement();
+            bullet.gameObject.SetTag("Bullet");
             _bulletPool.autoExpand = _bulletData.autoExpand;
             bullet.transform.position = _bulletStartPosition.position;
 

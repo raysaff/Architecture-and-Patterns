@@ -29,7 +29,7 @@ public class PoolMono<T> where T : MonoBehaviour
     {
         _pool = new List<T>();
 
-        for (int i=0; i< capacity; i++)
+        for (int i = 0; i < capacity; i++)
         {
             CreateObject();
         }
@@ -37,7 +37,7 @@ public class PoolMono<T> where T : MonoBehaviour
 
     private T CreateObject(bool isActiveByDefault = false)
     {
-        var createdObject = UnityEngine.Object.Instantiate(_prefab,_container);
+        var createdObject = UnityEngine.Object.Instantiate(_prefab, _container);
         createdObject.gameObject.SetActive(isActiveByDefault);
         _pool.Add(createdObject);
         return createdObject;
