@@ -10,12 +10,12 @@ public class BulletFactory : IBulletFactory
     }
     public GameObject CreateBullet()
     {
-        return new GameObject("Bullet").SetTag("Bullet").AddSprite(_bulletData.sprite)
-            .AddCircleCollider2D().AddRigidBody2D().AddTrailRenderer();
+        var gameObjectBuilder = new GameObjectBuilder();
+
+        GameObject bullet = gameObjectBuilder.Visual.Name("Bullet").Tag("Bullet").Sprite(_bulletData.sprite).
+                                              Physics.RigidBody2D().CircleCollider2D();
+
+        return bullet;
     }
 
-    public BulletController CreateBullets()
-    {
-        return new GameObject("Bullet").AddComponent<BulletController>();
-    }
 }
