@@ -1,3 +1,6 @@
+using System;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
 public static partial class BuilderExtensions
@@ -73,6 +76,29 @@ public static partial class BuilderExtensions
         lineRenderer.endColor = Color.blue;
         lineRendererGameObject.transform.SetParent(gameObject.transform);
         return gameObject;
+    }
+
+    public static T DeepCopy<T>(this T self)
+    {
+        if (!typeof(T).IsSerializable)
+        {
+            throw new ArgumentException("Type must be iserializable");
+        }
+
+        if (ReferenceEquals(self, null))
+        {
+            return default;
+        }
+
+        
+        var x = (object)self;
+        var formatter = new BinaryFormatter();
+        using (var stream = new MemoryStream())
+        {
+            formatter.Serialize(stream, x);
+            stream.Seek(0, SeekOrigin.Begin);
+            return (T)formatter.Deserialize(stream);
+        }
     }
 
 
