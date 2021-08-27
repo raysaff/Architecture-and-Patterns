@@ -78,7 +78,7 @@ public static partial class BuilderExtensions
         return gameObject;
     }
 
-    public static T DeepCopy<T>(this T self)
+    public static T DeepCopy<T>(this T self) where T : class
     {
         if (!typeof(T).IsSerializable)
         {
@@ -90,12 +90,10 @@ public static partial class BuilderExtensions
             return default;
         }
 
-        
-        var x = (object)self;
         var formatter = new BinaryFormatter();
         using (var stream = new MemoryStream())
         {
-            formatter.Serialize(stream, x);
+            formatter.Serialize(stream, self);
             stream.Seek(0, SeekOrigin.Begin);
             return (T)formatter.Deserialize(stream);
         }
