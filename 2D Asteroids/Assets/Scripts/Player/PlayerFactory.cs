@@ -21,7 +21,8 @@ public class PlayerFactory : IPlayerFactory
         var bulletStartPosition = new GameObject("BulletStartPosition");
         bulletStartPosition.transform.localPosition = new Vector3(0.0f, 0.5f, 0.0f);
         bulletStartPosition.transform.SetParent(player.transform);
-        
+
+        player.gameObject.SetAudioClip(Resources.Load<AudioClip>("Sounds/back"));
         return player;
     }
 }

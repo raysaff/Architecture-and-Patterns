@@ -78,6 +78,15 @@ public static partial class BuilderExtensions
         return gameObject;
     }
 
+    public static GameObject SetAudioClip(this GameObject gameObject, AudioClip clip)
+    {
+        var component = gameObject.GetOrAddComponent<AudioSource>();
+        component.clip = clip;
+        component.PlayOneShot(clip);
+        return gameObject;
+
+    }
+
     public static T DeepCopy<T>(this T self) where T : class
     {
         if (!typeof(T).IsSerializable)
