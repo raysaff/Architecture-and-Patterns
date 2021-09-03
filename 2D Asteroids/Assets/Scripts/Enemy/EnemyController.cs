@@ -23,12 +23,12 @@ public class EnemyController : MonoBehaviour, IEnemy
         _rb = GetComponent<Rigidbody2D>();
     }
 
-
     private void OnEnable()
     {
+        var speed = Random.Range(0,_enemyData._speed); 
         StartCoroutine("LifeRoutine");
         _rb.mass = _enemyData._mass;
-        _rb.AddForce(Random.insideUnitCircle*_enemyData._speed);
+        _rb.AddForce(Random.insideUnitCircle*speed, ForceMode2D.Force);
     }
 
     private void OnDisable()

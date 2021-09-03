@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80ebaeae6f9d5a34bbd28facfff9a877, type: 3}
   m_Name: EnemySettings
   m_EditorClassIdentifier: 
-  _speed: 200
+  _speed: 60
   _prefab: {fileID: 1212202597181761045, guid: ec0c041bbadeaa24a9c4f98af3601789, type: 3}
   _mass: 0.1
   frequency: 0.3

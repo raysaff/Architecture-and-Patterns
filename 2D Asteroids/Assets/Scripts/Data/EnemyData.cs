@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyData : ScriptableObject
 {
-    [SerializeField, Range(200, 1000)]
+    [SerializeField, Range(10, 1000)]
     public float _speed;
 
     [SerializeField]
