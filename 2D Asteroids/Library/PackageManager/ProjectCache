@@ -5,7 +5,7 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637650253366781649
+      ticks: 637653087798043337
     m_Hash: 2583795662
   m_LockFileStatus:
     m_FilePath: C:/Users/User/Desktop/Architecture-and-Patterns/2D Asteroids/Packages/packages-lock.json
@@ -13,7 +13,7 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637650253426278884
+      ticks: 637653087798043337
     m_Hash: 4259589839
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
