@@ -19,7 +19,7 @@ public class ShootController : IExecute
         _bulletData = data;
         _shoot = shoot;
         _unit = unit;
-        _bulletStartPosition = _unit.GetChild(2);
+        _bulletStartPosition = _unit.GetChild(1);
         _shoot.TakeShoot += Shooting;
     }
 

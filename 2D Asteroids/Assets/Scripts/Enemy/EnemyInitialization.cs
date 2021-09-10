@@ -14,6 +14,7 @@ public class EnemyInitialization : IExecute
         _player = player;
         _enemyPool = enemyPool;
     }
+
     public void Execute(float deltaTime)
     {
         _timer -= deltaTime;

@@ -118,4 +118,46 @@ public static partial class BuilderExtensions
         }
         return result;
     }
+
+    public static string NumberToAbbreviate(this long number, int startNumber = 5)
+    {
+        if (number < 0) throw new ArgumentOutOfRangeException(nameof(number), "insert a positive number");
+
+        string[] Postfixes = new[]
+        {
+            string.Empty, "K", "M", "B", "T", "aa", "bb"
+        };
+
+        startNumber = Mathf.Clamp(startNumber, 4, int.MaxValue);
+        int rank = 0;
+
+        long prompt = number;
+
+        while (prompt >= 1000L)
+        {
+            prompt /= 1000L;
+            rank++;
+        }
+
+        long categoryNumber = 1;
+        long categoryPrompt = prompt;
+
+        while (categoryPrompt >= 10L)
+        {
+            categoryPrompt /= 10L;
+            categoryNumber++;
+        }
+
+        if (rank * 3 + categoryNumber < startNumber)
+            return number.ToString();
+        
+
+        float subgroupRatio = number / Mathf.Pow(1000.0f, rank) - 0.001f;
+
+        if (subgroupRatio > 0.0f)
+            return $"{subgroupRatio:#.#}{Postfixes[rank]}";
+        
+
+        return $"{prompt:0}{Postfixes[rank]}";
+    }
 }
