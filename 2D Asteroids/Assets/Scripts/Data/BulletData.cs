@@ -1,21 +1,24 @@
+using Assets.Scripts.Bullets;
 using UnityEngine;
 
-
-[CreateAssetMenu(fileName = "BulletSettings", menuName = "Data/BulletSettings")]
-
-public sealed class BulletData : ScriptableObject
+namespace Assets.Scripts.Data
 {
-    [Range(100,1000)]
-    public float speed;
+    [CreateAssetMenu(fileName = "BulletSettings", menuName = "Data/BulletSettings")]
 
-    [SerializeField]
-    public BulletController _prefab;
+    public sealed class BulletData : ScriptableObject
+    {
+        [Range(100,1000)]
+        public float speed;
 
-    [SerializeField]
-    public bool autoExpand;
+        [SerializeField]
+        public BulletController _prefab;
 
-    public Sprite sprite;
+        [SerializeField]
+        public bool autoExpand;
 
-    public int count = 3;
+        public Sprite sprite;
 
+        public int count = 3;
+
+    }
 }

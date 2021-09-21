@@ -1,17 +1,24 @@
-public class EnemyFactory : IEnemyFactory
+using Assets.Scripts.BuilderExtensions;
+using Assets.Scripts.Data;
+using Assets.Scripts.Interfaces;
+
+namespace Assets.Scripts.Enemy
 {
-
-    private readonly EnemyData _enemyData;
-
-    public EnemyFactory(EnemyData enemyData)
+    public class EnemyFactory : IEnemyFactory
     {
-        _enemyData = enemyData;
-    }
 
-    public EnemyController CreateEnemy()
-    {
-        var enemy = _enemyData._prefab;
-        enemy.gameObject.SetTag("Enemy").SetActive(false);
-        return enemy;
+        private readonly EnemyData _enemyData;
+
+        public EnemyFactory(EnemyData enemyData)
+        {
+            _enemyData = enemyData;
+        }
+
+        public EnemyController CreateEnemy()
+        {
+            var enemy = _enemyData._prefab;
+            enemy.gameObject.SetTag("Enemy").SetActive(false);
+            return enemy;
+        }
     }
 }

@@ -1,4 +1,7 @@
-public interface ILateExecutes : IControllers
+namespace Assets.Scripts.Interfaces
 {
-    void LateExecute(float deltaTime);
+    public interface ILateExecutes : IControllers
+    {
+        void LateExecute(float deltaTime);
+    }
 }

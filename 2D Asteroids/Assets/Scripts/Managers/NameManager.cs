@@ -1,6 +1,9 @@
-public static class NameManager
+namespace Assets.Scripts.Managers
 {
-    public const string POOL_BULLETS = "Pool of Bullets";
-    public const string POOL_ENEMIES = "Pool of Enemies";
+    public static class NameManager
+    {
+        public const string POOL_BULLETS = "Pool of Bullets";
+        public const string POOL_ENEMIES = "Pool of Enemies";
 
+    }
 }

@@ -1,6 +1,9 @@
 using System;
 
-public interface IEnemy 
+namespace Assets.Scripts.Interfaces
 {
-    event Action<string> OnTriggerEnterChange;
+    public interface IEnemy 
+    {
+        event Action<string> OnTriggerEnterChange;
+    }
 }

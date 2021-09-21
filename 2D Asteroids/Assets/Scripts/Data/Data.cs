@@ -1,61 +1,64 @@
 using System.IO;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Data", menuName = "Data/Data")]
-public sealed class Data : ScriptableObject
+namespace Assets.Scripts.Data
 {
-    [SerializeField] 
-    private string _playerDataPath;
-    private PlayerData _player;
-
-    [SerializeField]
-    private string _bulletDataPath;
-    private BulletData _bullet;
-
-    [SerializeField]
-    private string _enemyDataPath;
-    private EnemyData _enemy;
-
-    public PlayerData Player
+    [CreateAssetMenu(fileName = "Data", menuName = "Data/Data")]
+    public sealed class Data : ScriptableObject
     {
-        get
+        [SerializeField] 
+        private string _playerDataPath;
+        private PlayerData _player;
+
+        [SerializeField]
+        private string _bulletDataPath;
+        private BulletData _bullet;
+
+        [SerializeField]
+        private string _enemyDataPath;
+        private EnemyData _enemy;
+
+        public PlayerData Player
         {
-            if (_player == null)
+            get
             {
-                _player = Load<PlayerData>("Data/" + _playerDataPath);
+                if (_player == null)
+                {
+                    _player = Load<PlayerData>("Data/" + _playerDataPath);
+                }
+
+                return _player;
             }
-
-            return _player;
         }
-    }
 
-    public BulletData Bullet
-    {
-        get
+        public BulletData Bullet
         {
-            if (_bullet == null)
+            get
             {
-                _bullet = Load<BulletData>("Data/" + _bulletDataPath);
+                if (_bullet == null)
+                {
+                    _bullet = Load<BulletData>("Data/" + _bulletDataPath);
+                }
+
+                return _bullet;
             }
-
-            return _bullet;
         }
-    }
 
-    public EnemyData Enemy
-    {
-        get
+        public EnemyData Enemy
         {
-            if (_enemy ==null)
+            get
             {
-                _enemy = Load<EnemyData>("Data/" + _enemyDataPath);
+                if (_enemy ==null)
+                {
+                    _enemy = Load<EnemyData>("Data/" + _enemyDataPath);
+                }
+
+                return _enemy;
             }
-
-            return _enemy;
         }
-    }
 
 
-    private T Load<T>(string resourcesPath) where T : Object =>
+        private T Load<T>(string resourcesPath) where T : Object =>
             Resources.Load<T>(Path.ChangeExtension(resourcesPath, null));
+    }
 }

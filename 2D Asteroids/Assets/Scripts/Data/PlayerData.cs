@@ -1,23 +1,26 @@
+using Assets.Scripts.Interfaces;
 using UnityEngine;
 
-
-[CreateAssetMenu(fileName = "UnitSettings", menuName = "Data/Unit/UnitSettings")]
-
-public sealed class PlayerData : ScriptableObject, IUnit
+namespace Assets.Scripts.Data
 {
-    [SerializeField, Range(30, 100)]
-    private float _speed;
+    [CreateAssetMenu(fileName = "UnitSettings", menuName = "Data/Unit/UnitSettings")]
 
-    [SerializeField]
-    private Vector2Int _position;
+    public sealed class PlayerData : ScriptableObject, IUnit
+    {
+        [SerializeField, Range(30, 100)]
+        private float _speed;
 
-    [SerializeField, Range(0,2)]
-    private float _mass;
+        [SerializeField]
+        private Vector2Int _position;
 
-    public Sprite sprite;
+        [SerializeField, Range(0,2)]
+        private float _mass;
 
-    public float Mass => _mass;
-    public float Speed => _speed;
-    public Vector2 Position => _position;
+        public Sprite sprite;
+
+        public float Mass => _mass;
+        public float Speed => _speed;
+        public Vector2 Position => _position;
     
+    }
 }

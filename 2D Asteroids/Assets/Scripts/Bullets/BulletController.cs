@@ -1,29 +1,32 @@
 using System.Collections;
 using UnityEngine;
 
-public class BulletController : MonoBehaviour
+namespace Assets.Scripts.Bullets
 {
-    private float _lifeTime = 3.0f;
-
-    private void OnEnable()
+    public class BulletController : MonoBehaviour
     {
-        StartCoroutine("LifeRoutine");
-    }
+        private float _lifeTime = 3.0f;
 
-    private void OnDisable()
-    {
-        StopCoroutine("LifeRoutine");
-    }
+        private void OnEnable()
+        {
+            StartCoroutine("LifeRoutine");
+        }
 
-    private IEnumerator LifeRoutine()
-    {
-        yield return new WaitForSecondsRealtime(_lifeTime);
+        private void OnDisable()
+        {
+            StopCoroutine("LifeRoutine");
+        }
 
-        Deactivate();
-    }
+        private IEnumerator LifeRoutine()
+        {
+            yield return new WaitForSecondsRealtime(_lifeTime);
 
-    private void Deactivate()
-    {
-        gameObject.SetActive(false);
+            Deactivate();
+        }
+
+        private void Deactivate()
+        {
+            gameObject.SetActive(false);
+        }
     }
 }

@@ -1,50 +1,55 @@
 using System;
 using System.Collections;
+using Assets.Scripts.Data;
+using Assets.Scripts.Interfaces;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class EnemyController : MonoBehaviour, IEnemy
+namespace Assets.Scripts.Enemy
 {
-    private float _lifeTime = 2.0f;
-    private Rigidbody2D _rb;
-    public event Action<string> OnTriggerEnterChange;
-    [SerializeField]
-    private EnemyData _enemyData;
-
-    private void OnCollisionEnter2D(Collision2D collision)
+    public class EnemyController : MonoBehaviour, IEnemy
     {
-        OnTriggerEnterChange?.Invoke(collision.gameObject.tag);
-        Deactivate();
-    }
+        private float _lifeTime = 2.0f;
+        private Rigidbody2D _rb;
+        public event Action<string> OnTriggerEnterChange;
+        [SerializeField]
+        private EnemyData _enemyData;
 
-    private void Awake()
-    {
-        _rb = GetComponent<Rigidbody2D>();
-    }
+        private void OnCollisionEnter2D(Collision2D collision)
+        {
+            OnTriggerEnterChange?.Invoke(collision.gameObject.tag);
+            Deactivate();
+        }
+
+        private void Awake()
+        {
+            _rb = GetComponent<Rigidbody2D>();
+        }
 
 
-    private void OnEnable()
-    {
-        var speed = Random.Range(0, _enemyData._speed); 
-        StartCoroutine("LifeRoutine");
-        _rb.mass = _enemyData._mass;
-        _rb.AddForce(Random.insideUnitCircle*speed, ForceMode2D.Force);
-    }
+        private void OnEnable()
+        {
+            var speed = Random.Range(0, _enemyData._speed); 
+            StartCoroutine("LifeRoutine");
+            _rb.mass = _enemyData._mass;
+            _rb.AddForce(Random.insideUnitCircle*speed, ForceMode2D.Force);
+        }
 
-    private void OnDisable()
-    {
-        StopCoroutine("LifeRoutine");
-    }
+        private void OnDisable()
+        {
+            StopCoroutine("LifeRoutine");
+        }
 
-    private IEnumerator LifeRoutine()
-    {
-        yield return new WaitForSecondsRealtime(_lifeTime);
+        private IEnumerator LifeRoutine()
+        {
+            yield return new WaitForSecondsRealtime(_lifeTime);
 
-        Deactivate();
-    }
+            Deactivate();
+        }
 
-    private void Deactivate()
-    {
-        gameObject.SetActive(false);
+        private void Deactivate()
+        {
+            gameObject.SetActive(false);
+        }
     }
 }
