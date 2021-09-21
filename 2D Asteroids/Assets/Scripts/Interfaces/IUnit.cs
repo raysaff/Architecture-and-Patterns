@@ -1,6 +1,9 @@
-﻿    public interface IUnit
+﻿    namespace Assets.Scripts.Interfaces
     {
-        float Speed { get; }
-        float Mass { get; }
+        public interface IUnit
+        {
+            float Speed { get; }
+            float Mass { get; }
+        }
     }
 

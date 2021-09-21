@@ -1,58 +1,63 @@
 using System;
 using System.Collections.Generic;
+using Assets.Scripts.Enemy;
+using Assets.Scripts.Interfaces;
 using UnityEngine;
 
-public class EnemyPool : IInit
+namespace Assets.Scripts.Pools
 {
-    public IEnemyFactory _enemyFactory;
-    public int _capacity;
-
-    private Transform _container;
-
-    public List<EnemyController> _enemyPool;
-
-    public EnemyPool(IEnemyFactory enemyFactory, int capacity, string poolName)
+    public class EnemyPool : IInit
     {
-        _enemyFactory = enemyFactory;
-        _capacity = capacity;
-        _container = new GameObject(poolName).transform;
-        CreateEnemyPool(capacity);
-    }
+        public IEnemyFactory _enemyFactory;
+        public int _capacity;
 
-    private void CreateEnemyPool(int capacity)
-    {
-        _enemyPool = new List<EnemyController>();
+        private Transform _container;
 
-        for (int i=0; i<capacity; i++)
+        public List<EnemyController> _enemyPool;
+
+        public EnemyPool(IEnemyFactory enemyFactory, int capacity, string poolName)
         {
-            _enemyPool.Add(UnityEngine.Object.Instantiate(_enemyFactory.CreateEnemy(), _container));
+            _enemyFactory = enemyFactory;
+            _capacity = capacity;
+            _container = new GameObject(poolName).transform;
+            CreateEnemyPool(capacity);
         }
-    }
 
-    public bool HasFreeElenet(out EnemyController element)
-    {
-        foreach (var enemy in _enemyPool)
+        private void CreateEnemyPool(int capacity)
         {
-            if (!enemy.gameObject.activeInHierarchy)
+            _enemyPool = new List<EnemyController>();
+
+            for (int i=0; i<capacity; i++)
             {
-                enemy.gameObject.SetActive(true);
-                element = enemy;
-                return true;
+                _enemyPool.Add(UnityEngine.Object.Instantiate(_enemyFactory.CreateEnemy(), _container));
             }
         }
-        element = null;
-        return false;
-    }
 
-    public EnemyController GetFreeElement()
-    {
-        if (HasFreeElenet(out var element))
-            return element;
+        public bool HasFreeElenet(out EnemyController element)
+        {
+            foreach (var enemy in _enemyPool)
+            {
+                if (!enemy.gameObject.activeInHierarchy)
+                {
+                    enemy.gameObject.SetActive(true);
+                    element = enemy;
+                    return true;
+                }
+            }
+            element = null;
+            return false;
+        }
 
-        throw new Exception($"Íåò ñâîáîäíûõ ýëåìåíòîâ {typeof(EnemyController)}");
-    }
+        public EnemyController GetFreeElement()
+        {
+            if (HasFreeElenet(out var element))
+                return element;
 
-    public void Initialization()
-    {
+            throw new Exception($"ÐÐµÑ‚ ÑÐ²Ð¾Ð±Ð¾Ð´Ð½Ñ‹Ñ… ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚Ð¾Ð² {typeof(EnemyController)}");
+        }
+
+        public void Initialization()
+        {
+        }
     }
 }

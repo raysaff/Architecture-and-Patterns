@@ -1,21 +1,24 @@
 using UnityEngine;
 
-public abstract class GameHandler : MonoBehaviour, IGameHandler
+namespace Assets.Scripts.HW6.ChainOfResponsibility
 {
-    private IGameHandler _nextHandler;
-
-    public IGameHandler SetNext(IGameHandler handler)
+    public abstract class GameHandler : MonoBehaviour, IGameHandler
     {
-        _nextHandler = handler;
-        return handler;
-    }
+        private IGameHandler _nextHandler;
 
-    public virtual IGameHandler Handle()
-    {
-        if (_nextHandler != null)
+        public IGameHandler SetNext(IGameHandler handler)
         {
-            _nextHandler.Handle();
+            _nextHandler = handler;
+            return handler;
         }
-        return _nextHandler;
+
+        public virtual IGameHandler Handle()
+        {
+            if (_nextHandler != null)
+            {
+                _nextHandler.Handle();
+            }
+            return _nextHandler;
+        }
     }
 }

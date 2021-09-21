@@ -1,23 +1,27 @@
+using Assets.Scripts.Interfaces;
 using UnityEngine;
 
-internal sealed class PlayerInitialization : IInit
+namespace Assets.Scripts.Controllers
 {
-    private readonly IPlayerFactory _playerFactory;
-    private Transform _player;
-
-    public PlayerInitialization(IPlayerFactory playerFactory, Vector2 positionPlayer)
+    internal sealed class PlayerInitialization : IInit
     {
-        _playerFactory = playerFactory;
-        _player = _playerFactory.CreatePlayer();
-        _player.position = positionPlayer;
-    }
+        private readonly IPlayerFactory _playerFactory;
+        private Transform _player;
 
-    public void Initialization()
-    {
-    }
+        public PlayerInitialization(IPlayerFactory playerFactory, Vector2 positionPlayer)
+        {
+            _playerFactory = playerFactory;
+            _player = _playerFactory.CreatePlayer();
+            _player.position = positionPlayer;
+        }
 
-    public Transform GetPlayer()
-    {
-        return _player;
+        public void Initialization()
+        {
+        }
+
+        public Transform GetPlayer()
+        {
+            return _player;
+        }
     }
 }

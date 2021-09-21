@@ -1,4 +1,7 @@
-public interface IControllers
+namespace Assets.Scripts.Interfaces
 {
+    public interface IControllers
+    {
 
+    }
 }

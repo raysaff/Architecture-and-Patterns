@@ -1,5 +1,8 @@
-public interface IGameHandler
+namespace Assets.Scripts.HW6.ChainOfResponsibility
 {
-    IGameHandler Handle();
-    IGameHandler SetNext(IGameHandler nextHandler);
+    public interface IGameHandler
+    {
+        IGameHandler Handle();
+        IGameHandler SetNext(IGameHandler nextHandler);
+    }
 }

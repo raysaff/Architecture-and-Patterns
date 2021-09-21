@@ -1,8 +1,10 @@
 using System;
 
-
-public interface IUserShoots 
+namespace Assets.Scripts.Interfaces
 {
-    event Action<float[]> TakeShoot;
-    void GetShoot();
+    public interface IUserShoots 
+    {
+        event Action<float[]> TakeShoot;
+        void GetShoot();
+    }
 }

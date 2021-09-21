@@ -1,18 +1,24 @@
+using Assets.Scripts.BuilderExtensions;
+using Assets.Scripts.Data;
+using Assets.Scripts.Interfaces;
 using UnityEngine;
 
-public class PlayerFactory : IPlayerFactory
+namespace Assets.Scripts.Player
 {
-    private readonly PlayerData _playerData;
-
-    public PlayerFactory(PlayerData playerData)
+    public class PlayerFactory : IPlayerFactory
     {
-        _playerData = playerData;
-    }
+        private readonly PlayerData _playerData;
 
-    public Transform CreatePlayer()
-    {
-        var player = Object.Instantiate(Resources.Load<GameObject>("Prefabs/Player")).transform;
-        player.gameObject.AddCircleCollider2D().AddRigidBody2D().AddTrailRenderer();
-        return player;
+        public PlayerFactory(PlayerData playerData)
+        {
+            _playerData = playerData;
+        }
+
+        public Transform CreatePlayer()
+        {
+            var player = Object.Instantiate(Resources.Load<GameObject>("Prefabs/Player")).transform;
+            player.gameObject.AddCircleCollider2D().AddRigidBody2D().AddTrailRenderer();
+            return player;
+        }
     }
 }

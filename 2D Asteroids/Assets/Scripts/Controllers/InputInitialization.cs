@@ -1,38 +1,44 @@
-internal sealed class InputInitialization : IInit
+using Assets.Scripts.Interfaces;
+using Assets.Scripts.UserInput;
+
+namespace Assets.Scripts.Controllers
 {
-    private IUserInputAxis _inputHorizontal;
-    private IUserInputAxis _inputVertical;
-    private IUserInputDirection _sightDirection;
-    private IUserShoots _inputShoot;
-
-    public InputInitialization()
+    internal sealed class InputInitialization : IInit
     {
-        _inputHorizontal = new InputHorizontal();
-        _inputVertical = new InputVertical();
-        _sightDirection = new InputDirection();
-        _inputShoot = new InputShoot();
-    }
+        private IUserInputAxis _inputHorizontal;
+        private IUserInputAxis _inputVertical;
+        private IUserInputDirection _sightDirection;
+        private IUserShoots _inputShoot;
 
-    public void Initialization()
-    {
-    }
+        public InputInitialization()
+        {
+            _inputHorizontal = new InputHorizontal();
+            _inputVertical = new InputVertical();
+            _sightDirection = new InputDirection();
+            _inputShoot = new InputShoot();
+        }
 
-    public (IUserInputAxis inputHorizontal, IUserInputAxis inputVertical) GetInputAxis()
-    {
-        (IUserInputAxis inputHorizontal, IUserInputAxis inputVertical) result = (_inputHorizontal, _inputVertical);
-        return result;
-    }
+        public void Initialization()
+        {
+        }
 
-    public IUserInputDirection GetInputDirection()
-    {
-        IUserInputDirection inputDirection = _sightDirection;
-        return inputDirection;
-    }
+        public (IUserInputAxis inputHorizontal, IUserInputAxis inputVertical) GetInputAxis()
+        {
+            (IUserInputAxis inputHorizontal, IUserInputAxis inputVertical) result = (_inputHorizontal, _inputVertical);
+            return result;
+        }
 
-    public IUserShoots GetShoot()
-    {
-        IUserShoots inputShoot = _inputShoot;
-        return inputShoot;
-    }
+        public IUserInputDirection GetInputDirection()
+        {
+            IUserInputDirection inputDirection = _sightDirection;
+            return inputDirection;
+        }
+
+        public IUserShoots GetShoot()
+        {
+            IUserShoots inputShoot = _inputShoot;
+            return inputShoot;
+        }
         
+    }
 }

@@ -1,16 +1,21 @@
 using System;
+using Assets.Scripts.Interfaces;
+using Assets.Scripts.Managers;
 using UnityEngine;
 
-public class InputShoot : IUserShoots
+namespace Assets.Scripts.UserInput
 {
-    public event Action<float[]> TakeShoot = delegate (float[] f) { };
-
-    public void GetShoot()
+    public class InputShoot : IUserShoots
     {
-        if (Input.GetMouseButtonDown(MouseButtonManager.LEFTBUTTON))
+        public event Action<float[]> TakeShoot = delegate (float[] f) { };
+
+        public void GetShoot()
         {
-            float[] mousePosition = new float[2] { Input.mousePosition.x, Input.mousePosition.y };
-            TakeShoot.Invoke(mousePosition);
+            if (Input.GetMouseButtonDown(MouseButtonManager.LEFTBUTTON))
+            {
+                float[] mousePosition = new float[2] { Input.mousePosition.x, Input.mousePosition.y };
+                TakeShoot.Invoke(mousePosition);
+            }
         }
     }
 }

@@ -1,7 +1,10 @@
 using System;
 
-public interface IUserInputDirection 
+namespace Assets.Scripts.Interfaces
 {
-    event Action<float[]> DirectionOnChange;
-    void GetDirection();
+    public interface IUserInputDirection 
+    {
+        event Action<float[]> DirectionOnChange;
+        void GetDirection();
+    }
 }
