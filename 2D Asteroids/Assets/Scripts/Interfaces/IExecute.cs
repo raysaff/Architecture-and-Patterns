@@ -1,4 +1,7 @@
-public interface IExecute : IControllers
+namespace Assets.Scripts.Interfaces
 {
-    void Execute(float deltaTime);
+    public interface IExecute : IControllers
+    {
+        void Execute(float deltaTime);
+    }
 }

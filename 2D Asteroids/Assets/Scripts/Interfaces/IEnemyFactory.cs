@@ -1,6 +1,11 @@
 
 
-public interface IEnemyFactory 
+using Assets.Scripts.Enemy;
+
+namespace Assets.Scripts.Interfaces
 {
-    EnemyController CreateEnemy();
+    public interface IEnemyFactory 
+    {
+        EnemyController CreateEnemy();
+    }
 }

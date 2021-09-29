@@ -1,36 +1,41 @@
 using System.Collections.Generic;
+using Assets.Scripts.Interfaces;
+using Assets.Scripts.Pools;
 using UnityEngine;
 
-public class CollisionController : IInit
+namespace Assets.Scripts.Controllers
 {
-    private IEnumerable<IEnemy> _enemies;
-
-    public CollisionController(EnemyPool enemyPool)
+    public class CollisionController : IInit
     {
-        _enemies = enemyPool._enemyPool;
-    }
+        private IEnumerable<IEnemy> _enemies;
 
-
-    public void Initialization()
-    {
-        foreach (var enemy in _enemies)
+        public CollisionController(EnemyPool enemyPool)
         {
-            enemy.OnTriggerEnterChange += EnemyOnOnTriggerEnterChange;
-        }
-    }
-
-    private void EnemyOnOnTriggerEnterChange(string collisionTag)
-    {
-        if (collisionTag=="Player")
-        {
-            Debug.Log("Damage");
-        }
-        else if (collisionTag =="Bullet")
-        {
-            Debug.Log("Match");
+            _enemies = enemyPool._enemyPool;
         }
 
+
+        public void Initialization()
+        {
+            foreach (var enemy in _enemies)
+            {
+                enemy.OnTriggerEnterChange += EnemyOnOnTriggerEnterChange;
+            }
+        }
+
+        private void EnemyOnOnTriggerEnterChange(string collisionTag)
+        {
+            if (collisionTag=="Player")
+            {
+                Debug.Log("Damage");
+            }
+            else if (collisionTag =="Bullet")
+            {
+                Debug.Log("Match");
+            }
+
+        }
+
+
     }
-
-
 }

@@ -1,7 +1,10 @@
 
 using UnityEngine;
 
-public interface IBulletFactory 
+namespace Assets.Scripts.Interfaces
 {
-    GameObject CreateBullet();
+    public interface IBulletFactory 
+    {
+        GameObject CreateBullet();
+    }
 }

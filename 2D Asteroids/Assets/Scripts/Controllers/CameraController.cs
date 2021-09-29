@@ -1,4 +1,8 @@
+using Assets.Scripts.Interfaces;
 using UnityEngine;
+
+namespace Assets.Scripts.Controllers
+{
     internal sealed class CameraController : ILateExecutes
     {
         private readonly Transform _player;
@@ -17,4 +21,5 @@ using UnityEngine;
             _mainCamera.position = _player.position + _offset;
         }
     }
+}
 

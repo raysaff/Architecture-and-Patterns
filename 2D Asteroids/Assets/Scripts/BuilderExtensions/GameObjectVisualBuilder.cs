@@ -1,36 +1,39 @@
 using UnityEngine;
 
-internal sealed class GameObjectVisualBuilder : GameObjectBuilder
+namespace Assets.Scripts.BuilderExtensions
 {
-    public GameObjectVisualBuilder(GameObject gameObject) : base(gameObject) { }
-
-    public GameObjectVisualBuilder Name(string name)
+    internal sealed class GameObjectVisualBuilder : GameObjectBuilder
     {
-        _gameObject.name = name;
-        return this;
-    }
+        public GameObjectVisualBuilder(GameObject gameObject) : base(gameObject) { }
 
-    public GameObjectVisualBuilder Tag(string tag)
-    {
-        _gameObject.tag = tag;
-        return this;
-    }
-
-    public GameObjectVisualBuilder Sprite(Sprite sprite)
-    {
-        var component = GetOrAddComponent<SpriteRenderer>();
-        component.sprite = sprite;
-        return this;
-
-    }
-
-    private T GetOrAddComponent<T>() where T : Component
-    {
-        var result = _gameObject.GetComponent<T>();
-        if (!result)
+        public GameObjectVisualBuilder Name(string name)
         {
-            result = _gameObject.AddComponent<T>();
+            _gameObject.name = name;
+            return this;
         }
-        return result;
+
+        public GameObjectVisualBuilder Tag(string tag)
+        {
+            _gameObject.tag = tag;
+            return this;
+        }
+
+        public GameObjectVisualBuilder Sprite(Sprite sprite)
+        {
+            var component = GetOrAddComponent<SpriteRenderer>();
+            component.sprite = sprite;
+            return this;
+
+        }
+
+        private T GetOrAddComponent<T>() where T : Component
+        {
+            var result = _gameObject.GetComponent<T>();
+            if (!result)
+            {
+                result = _gameObject.AddComponent<T>();
+            }
+            return result;
+        }
     }
 }

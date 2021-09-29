@@ -1,8 +1,11 @@
 using System;
 
-public interface IUserInputAxis
+namespace Assets.Scripts.Interfaces
 {
-    event Action<float> AxisOnChange;
+    public interface IUserInputAxis
+    {
+        event Action<float> AxisOnChange;
 
-    void GetAxis();
+        void GetAxis();
+    }
 }

@@ -1,5 +1,8 @@
-public interface IInit : IControllers
+namespace Assets.Scripts.Interfaces
 {
-    void Initialization();
+    public interface IInit : IControllers
+    {
+        void Initialization();
+    }
 }
 

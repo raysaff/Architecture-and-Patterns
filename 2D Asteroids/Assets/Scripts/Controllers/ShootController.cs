@@ -1,51 +1,59 @@
+using Assets.Scripts.BuilderExtensions;
+using Assets.Scripts.Bullets;
+using Assets.Scripts.Data;
+using Assets.Scripts.Interfaces;
+using Assets.Scripts.Pools;
 using UnityEngine;
 
-public class ShootController : IExecute
+namespace Assets.Scripts.Controllers
 {
-    private BulletData _bulletData;
-
-    private readonly Transform _unit;
-    private bool _fire = false;
-    private Vector3 _mousePosition;
-    private IUserShoots _shoot;
-    private readonly Transform _bulletStartPosition;
-    private Rigidbody2D _bulletRB;
-    private PoolMono<BulletController> _bulletPool;
-
-    public ShootController(IUserShoots shoot, Transform unit, BulletData data, PoolMono<BulletController> bulletPool)
+    public class ShootController : IExecute
     {
-        _bulletPool = bulletPool;
-        _bulletPool.autoExpand = bulletPool.autoExpand;
-        _bulletData = data;
-        _shoot = shoot;
-        _unit = unit;
-        _bulletStartPosition = _unit.GetChild(2);
-        _shoot.TakeShoot += Shooting;
-    }
+        private BulletData _bulletData;
 
-    private void Shooting(float[] values)
-    {
-        _fire = true;
-        _mousePosition.Set(values[0], values[1], 0.0f);
-    }
+        private readonly Transform _unit;
+        private bool _fire = false;
+        private Vector3 _mousePosition;
+        private IUserShoots _shoot;
+        private readonly Transform _bulletStartPosition;
+        private Rigidbody2D _bulletRB;
+        private PoolMono<BulletController> _bulletPool;
 
-
-    public void Execute(float deltaTime)
-    {
-        if (_fire)
+        public ShootController(IUserShoots shoot, Transform unit, BulletData data, PoolMono<BulletController> bulletPool)
         {
-            var speed = _bulletData.speed * deltaTime;
-            var bullet = _bulletPool.GetFreeElement();
-            bullet.gameObject.SetTag("Bullet");
-            _bulletPool.autoExpand = _bulletData.autoExpand;
-            bullet.transform.position = _bulletStartPosition.position;
+            _bulletPool = bulletPool;
+            _bulletPool.autoExpand = bulletPool.autoExpand;
+            _bulletData = data;
+            _shoot = shoot;
+            _unit = unit;
+            _bulletStartPosition = _unit.GetChild(1);
+            _shoot.TakeShoot += Shooting;
+        }
 
-            _bulletRB = bullet.GetComponent<Rigidbody2D>();
+        private void Shooting(float[] values)
+        {
+            _fire = true;
+            _mousePosition.Set(values[0], values[1], 0.0f);
+        }
 
-            Vector3 moveDirection = Camera.main.ScreenToWorldPoint(_mousePosition) - _bulletStartPosition.position;
-            _bulletRB.AddForce(moveDirection * speed, ForceMode2D.Impulse);
 
-            _fire = false;
+        public void Execute(float deltaTime)
+        {
+            if (_fire)
+            {
+                var speed = _bulletData.speed * deltaTime;
+                var bullet = _bulletPool.GetFreeElement();
+                bullet.gameObject.SetTag("Bullet");
+                _bulletPool.autoExpand = _bulletData.autoExpand;
+                bullet.transform.position = _bulletStartPosition.position;
+
+                _bulletRB = bullet.GetComponent<Rigidbody2D>();
+
+                Vector3 moveDirection = Camera.main.ScreenToWorldPoint(_mousePosition) - _bulletStartPosition.position;
+                _bulletRB.AddForce(moveDirection * speed, ForceMode2D.Impulse);
+
+                _fire = false;
+            }
         }
     }
 }

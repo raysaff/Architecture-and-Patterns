@@ -1,21 +1,27 @@
+using Assets.Scripts.BuilderExtensions;
+using Assets.Scripts.Data;
+using Assets.Scripts.Interfaces;
 using UnityEngine;
 
-public class BulletFactory : IBulletFactory
+namespace Assets.Scripts.Bullets
 {
-    private readonly BulletData _bulletData;
-
-    public BulletFactory(BulletData bulletData)
+    public class BulletFactory : IBulletFactory
     {
-        _bulletData = bulletData;
+        private readonly BulletData _bulletData;
+
+        public BulletFactory(BulletData bulletData)
+        {
+            _bulletData = bulletData;
+        }
+        public GameObject CreateBullet()
+        {
+            var gameObjectBuilder = new GameObjectBuilder();
+
+            GameObject bullet = gameObjectBuilder.Visual.Name("Bullet").Tag("Bullet").Sprite(_bulletData.sprite).
+                Physics.RigidBody2D().CircleCollider2D();
+
+            return bullet;
+        }
+
     }
-    public GameObject CreateBullet()
-    {
-        var gameObjectBuilder = new GameObjectBuilder();
-
-        GameObject bullet = gameObjectBuilder.Visual.Name("Bullet").Tag("Bullet").Sprite(_bulletData.sprite).
-                                              Physics.RigidBody2D().CircleCollider2D();
-
-        return bullet;
-    }
-
 }

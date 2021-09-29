@@ -1,12 +1,17 @@
 using System;
+using Assets.Scripts.Interfaces;
+using Assets.Scripts.Managers;
 using UnityEngine;
 
-public sealed class InputHorizontal : IUserInputAxis
+namespace Assets.Scripts.UserInput
 {
-    public event Action<float> AxisOnChange = delegate (float f) { };
-
-    public void GetAxis()
+    public sealed class InputHorizontal : IUserInputAxis
     {
-        AxisOnChange.Invoke(Input.GetAxis(AxisManager.HORIZONTAL));
+        public event Action<float> AxisOnChange = delegate (float f) { };
+
+        public void GetAxis()
+        {
+            AxisOnChange.Invoke(Input.GetAxis(AxisManager.HORIZONTAL));
+        }
     }
 }

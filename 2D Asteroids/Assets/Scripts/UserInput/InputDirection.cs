@@ -1,14 +1,18 @@
 using System;
+using Assets.Scripts.Interfaces;
 using UnityEngine;
 
-public class InputDirection : IUserInputDirection
+namespace Assets.Scripts.UserInput
 {
-
-    public event Action<float[]> DirectionOnChange = delegate (float[] f) { };
-
-    public void GetDirection()
+    public class InputDirection : IUserInputDirection
     {
-        float[] mousePosition = new float[2] { Input.mousePosition.x, Input.mousePosition.y }; 
-        DirectionOnChange.Invoke(mousePosition);
+
+        public event Action<float[]> DirectionOnChange = delegate (float[] f) { };
+
+        public void GetDirection()
+        {
+            float[] mousePosition = new float[2] { Input.mousePosition.x, Input.mousePosition.y }; 
+            DirectionOnChange.Invoke(mousePosition);
+        }
     }
 }

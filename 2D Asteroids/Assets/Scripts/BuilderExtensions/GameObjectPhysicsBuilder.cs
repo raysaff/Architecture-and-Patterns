@@ -1,31 +1,34 @@
 using UnityEngine;
 
-internal sealed class GameObjectPhysicsBuilder : GameObjectBuilder
+namespace Assets.Scripts.BuilderExtensions
 {
-    public GameObjectPhysicsBuilder(GameObject gameObject) : base(gameObject) { }
-
-    public GameObjectPhysicsBuilder CircleCollider2D()
+    internal sealed class GameObjectPhysicsBuilder : GameObjectBuilder
     {
-        GetOrAddComponent<CircleCollider2D>();
-        return this;
-    }
+        public GameObjectPhysicsBuilder(GameObject gameObject) : base(gameObject) { }
 
-    public GameObjectPhysicsBuilder RigidBody2D()
-    {
-        var component = GetOrAddComponent<Rigidbody2D>();
-        component.gravityScale = 0;
-        component.freezeRotation = true;
-        return this;
-    }
-
-
-    private T GetOrAddComponent<T>() where T : Component
-    {
-        var result = _gameObject.GetComponent<T>();
-        if (!result)
+        public GameObjectPhysicsBuilder CircleCollider2D()
         {
-            result = _gameObject.AddComponent<T>();
+            GetOrAddComponent<CircleCollider2D>();
+            return this;
         }
-        return result;
+
+        public GameObjectPhysicsBuilder RigidBody2D()
+        {
+            var component = GetOrAddComponent<Rigidbody2D>();
+            component.gravityScale = 0;
+            component.freezeRotation = true;
+            return this;
+        }
+
+
+        private T GetOrAddComponent<T>() where T : Component
+        {
+            var result = _gameObject.GetComponent<T>();
+            if (!result)
+            {
+                result = _gameObject.AddComponent<T>();
+            }
+            return result;
+        }
     }
 }
